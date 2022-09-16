@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <title>Formulaire</title>
+</head>
+    <body ng-app="myApp">
+        
+        <div ng-controller="Ctrl">
+            <h1>Form test</h1>
+
+            <form action="" style="display: flex; flex-direction:column; width:50%;">
+                
+                Votre email : {{email}}
+                <input type="text" placeholder="Email" name="email" ng-model="email">
+                
+                Votre nom : {{nom}}
+                <input type="text" placeholder="Nom" name="nom" ng-model="nom" ng-show="email.length > 0">
+                
+                Votre prénom : {{prenom}}
+                <input type="text" placeholder="Prénom" name="prenom" ng-model="prenom" ng-show="nom.length > 0">
+                
+                <div>
+                    
+                    <label for="">Votre age : {{selectedAge}} <span ng-show="selectedAge !== ''">{{selectedAgePlural()}}</span></label>
+                    <select name="age" id="age" aria-placeholder="Age" ng-model="selectedAge" ng-show="prenom.length > 0">
+                        <option ng-repeat="age in ages()" value="{{age}}">{{age}}</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="">Votre profession : {{selectedJob.job}}</label>
+                    <select name="profession" id="profession" aria-placeholder="Profession" ng-show="selectedAge !== ''" ng-model="selectedJob" ng-options="job.job for job in jobs">
+                        <!-- <option ng-repeat="job in jobs | orderBy : expression" value="{{job.job}}" ng-click="setSelected($index)">{{job.job}}</option> -->
+                    </select>
+                </div>
+
+                <div>
+                    <label for="">Domaine d'activité : {{selectedDomain}}</label>
+                    <select name="domaine" id="domaine" aria-placeholder="Domaine d'activité" ng-show="selectedJob !== ''" ng-model="selectedDomain" ng-options="domain for domain in selectedJob.domains">
+                        <!-- <option ng-repeat="domain in jobs | orderBy : expression" value="{{domain.domains}}">{{domain.domains}}</option> -->
+                    </select>
+                </div>
+
+                <button type="submit" ng-disabled="email.length == 0 || nom.length == 0 || prenom.length == 0 || selectedAge == '' || selectedJob == '' || selectedDomain == ''">Envoyer</button>
+            </form>
+    
+        </div>
+
+    </body>
+</html>
