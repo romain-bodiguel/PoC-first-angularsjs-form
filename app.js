@@ -13,6 +13,13 @@ app.controller('Ctrl', function($scope) {
         }
         return ageArray;
     };
+    $scope.selectedAgePlural = function() {
+        if ($scope.selectedAge !== '' && $scope.selectedAge > 1) {
+            return "ans";
+        } else {
+            return "an";
+        }
+    };
     $scope.jobs = [
         {
             'job' : 'Charpentier',
@@ -71,11 +78,4 @@ app.controller('Ctrl', function($scope) {
     $scope.selectedAge = "";
     $scope.selectedJob = "";
     $scope.selectedDomain = "";
-    $scope.selectedAgePlural = function() {
-        if ($scope.selectedAge !== '' && $scope.selectedAge > 1) {
-            return "ans";
-        } else {
-            return "an";
-        }
-    };
 });
